@@ -39,4 +39,8 @@
     <FileVersion>$(AssemblyVersion)</FileVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" Condition="'$(TargetFramework)' == 'net45'" />
+  </ItemGroup>
+
 </Project>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,10 @@ namespace Juniansoft.SharpExifTool
 {
     public class ExifTool : IDisposable
     {
-        private const string ExifToolBin = "exiftool.exe";
+        private readonly string ExifToolBin = 
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
+            ? "exiftool.exe" 
+            : "exiftool";
         private const string Arguments = @"-stay_open 1 -@ - -common_args -charset UTF8 -G1 -args";
         private readonly string ExitCommand
             = string.Join(Environment.NewLine, new string[] { "-stay_open", "0", $"-execute{Environment.NewLine}" });
