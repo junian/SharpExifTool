@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,19 +58,62 @@ namespace Juniansoft.SharpExifTool
             _reader = _processExifTool.StandardOutput;
         }
 
-        public Task<IList<KeyValuePair<string, string>>> GetPropertiesAsync(string filename)
+        public Task<int> RunAsync(string args)
+        {
+            return Task.FromResult(Run(args));
+        }
+
+        public Task<int> RunAsync(params string[] args)
+        {
+            return Task.FromResult(Run(args));
+        }
+
+        public Task<int> RunAsync(IEnumerable<string> args)
+        {
+            return Task.FromResult(Run(args));
+        }
+
+        public int Run(string args)
+        {
+            var argList = args
+                .Split(' ')
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Select(x => x.Trim());
+            return Run(argList);
+        }
+
+        public int Run(params string[] args)
+        {
+            return Run((IEnumerable<string>) args);
+        }
+
+        public int Run(IEnumerable<string> args)
+        {
+            var sb = new StringBuilder();
+            foreach (var arg in args)
+            {
+                sb.AppendLine(arg);
+            }
+
+            sb.AppendLine("-execute");
+
+            _writer.Write(sb.ToString());
+            _writer.Flush();
+
+            return 0;
+        }
+
+        public Task<ICollection<KeyValuePair<string, string>>> GetPropertiesAsync(string filename)
         {
             return Task.FromResult(GetProperties(filename));
         }
-        public IList<KeyValuePair<string, string>> GetProperties(string filename)
+        public ICollection<KeyValuePair<string, string>> GetProperties(string filename)
         {
-            var commands = new string[] { filename, $"-execute{Environment.NewLine}" };
-            _writer.Write(string.Join(Environment.NewLine, commands));
-            _writer.Flush();
+            Run(filename);
 
-            var result = new List<KeyValuePair<string, string>>();
+            var result = new Dictionary<string, string>();
 
-            for (; ; )
+            while(true)
             {
                 var line = _reader.ReadLine();
 
@@ -81,7 +125,7 @@ namespace Juniansoft.SharpExifTool
                     {
                         string key = line.Substring(1, eq - 1);
                         string value = line.Substring(eq + 1).Trim();
-                        result.Add(new KeyValuePair<string, string>(key, value));
+                        result.Add(key, value);
                     }
                 }
             }
@@ -97,8 +141,7 @@ namespace Juniansoft.SharpExifTool
         public int RemoveAllProperties(string filename)
         {
             AddOrEditProperties(filename, new Dictionary<string, string> { ["all"] = "" });
-            var line = _reader.ReadLine();
-            Debug.WriteLine(line);
+            
             return 0;
         }
 
@@ -116,10 +159,11 @@ namespace Juniansoft.SharpExifTool
             }
 
             commands.Add(filename);
-            commands.Add($"-execute{Environment.NewLine}");
 
-            _writer.Write(string.Join(Environment.NewLine, commands));
-            _writer.Flush();
+            Run(commands);
+
+            var line = _reader.ReadLine();
+            Debug.WriteLine(line);
 
             return 0;
         }
