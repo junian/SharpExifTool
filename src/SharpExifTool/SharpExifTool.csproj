@@ -1,9 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net8.0;net6.0;netstandard2.0;netstandard1.3;netstandard1.0;net45;net40;</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    <RootNamespace>Juniansoft.SharpExifTool</RootNamespace>
+    <AssemblyName>SharpExifTool</AssemblyName>
+    <Authors>Junian Triajianto</Authors>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Owners>junian</Owners>
+    <PackageProjectUrl>https://www.juniansoft.com/sharp-exiftool/</PackageProjectUrl>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Summary>C# exiftool wrapper</Summary>
+    <PackageTags>exif,exiftool,metadata</PackageTags>
+    <Title>SharpExifTool</Title>
+    <Description>C# exiftool wrapper.</Description>
+    <PackageId>SharpExifTool</PackageId>
+    <Copyright>Copyright (c) 2024 - Present</Copyright>
+    <RepositoryUrl>https://github.com/junian/sharp-exiftool</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <!--
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SharpExifTool.snk</AssemblyOriginatorKeyFile>
+    -->
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+      <!--
+    <PackageIcon>sharp-exiftool-logo.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    -->
+    <CLSCompliant>True</CLSCompliant>
+	
+    <!-- Versions -->
+    <AssemblyVersion>12.84.0.1</AssemblyVersion>
+    <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
+    <Version>$(AssemblyVersion)</Version>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
   </PropertyGroup>
 
 </Project>
