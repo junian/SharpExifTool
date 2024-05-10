@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Juniansoft.SharpExifTool
 {
-    internal class ExifTool: IDisposable
+    public class ExifTool : IDisposable
     {
-        const string ExifToolBin = "exiftool.exe";
-        const string Arguments = @"-stay_open 1 -@ - -common_args -charset UTF8 -G1 -args";
-        readonly string ExitCommand = $"-stay_open{Environment.NewLine}0{Environment.NewLine}-execute{Environment.NewLine}";
-        const int Timeout = 30000;    // in milliseconds
-        const int ExitTimeout = 15000;
+        private const string ExifToolBin = "exiftool.exe";
+        private const string Arguments = @"-stay_open 1 -@ - -common_args -charset UTF8 -G1 -args";
+        private readonly string ExitCommand
+            = string.Join(Environment.NewLine, new string[] { "-stay_open", "0", $"-execute{Environment.NewLine}" });
+        private const int Timeout = 30000;    // in milliseconds
+        private const int ExitTimeout = 15000;
 
         private readonly Encoding Utf8NoBOM = new UTF8Encoding(false);
 
@@ -51,21 +53,22 @@ namespace Juniansoft.SharpExifTool
             _reader = _processExifTool.StandardOutput;
         }
 
-        public void GetProperties(string filename, ICollection<KeyValuePair<string, string>> propsRead)
+        public Task<IList<KeyValuePair<string, string>>> GetPropertiesAsync(string filename)
         {
-            _writer.Write(filename);
-            _writer.Write($"{Environment.NewLine}-execute{Environment.NewLine}");
+            return Task.FromResult(GetProperties(filename));
+        }
+        public IList<KeyValuePair<string, string>> GetProperties(string filename)
+        {
+            var commands = new string[] { filename, $"-execute{Environment.NewLine}" };
+            _writer.Write(string.Join(Environment.NewLine, commands));
             _writer.Flush();
-#if EXIF_TRACE
-            Debug.WriteLine(filename);
-            Debug.WriteLine("-execute");
-#endif
+
+            var result = new List<KeyValuePair<string, string>>();
+
             for (; ; )
             {
                 var line = _reader.ReadLine();
-#if EXIF_TRACE
-                Debug.WriteLine(line);
-#endif
+
                 if (line.StartsWith("{ready")) break;
                 if (line[0] == '-')
                 {
@@ -74,10 +77,27 @@ namespace Juniansoft.SharpExifTool
                     {
                         string key = line.Substring(1, eq - 1);
                         string value = line.Substring(eq + 1).Trim();
-                        propsRead.Add(new KeyValuePair<string, string>(key, value));
+                        result.Add(new KeyValuePair<string, string>(key, value));
                     }
                 }
             }
+
+            return result;
+        }
+
+        public Task<int> RemoveAllPropertiesAsync(string filename)
+        {
+            return Task.FromResult(RemoveAllProperties(filename));
+        }
+
+        public int RemoveAllProperties(string filename)
+        {
+            var commands = new string[] { "-all=", filename, $"-execute{Environment.NewLine}" };
+            _writer.Write(string.Join(Environment.NewLine, commands));
+            _writer.Flush();
+            var line = _reader.ReadLine();
+            Debug.WriteLine(line);
+            return 0;
         }
 
         #region IDisposable Support
