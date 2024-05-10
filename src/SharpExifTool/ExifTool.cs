@@ -92,11 +92,31 @@ namespace Juniansoft.SharpExifTool
 
         public int RemoveAllProperties(string filename)
         {
-            var commands = new string[] { "-all=", filename, $"-execute{Environment.NewLine}" };
-            _writer.Write(string.Join(Environment.NewLine, commands));
-            _writer.Flush();
+            AddOrEditProperties(filename, new Dictionary<string, string> { ["all"] = "" });
             var line = _reader.ReadLine();
             Debug.WriteLine(line);
+            return 0;
+        }
+
+        public Task<int> AddOrEditPropertiesAsync(string filename, ICollection<KeyValuePair<string, string>> properties)
+        {
+            return Task.FromResult(AddOrEditProperties(filename, properties));
+        }
+        public int AddOrEditProperties(string filename, ICollection<KeyValuePair<string, string>> properties)
+        {
+            var commands = new List<string> { };
+
+            foreach(var  property in properties)
+            {
+                commands.Add($"-{property.Key}={property.Value}");
+            }
+
+            commands.Add(filename);
+            commands.Add($"-execute{Environment.NewLine}");
+
+            _writer.Write(string.Join(Environment.NewLine, commands));
+            _writer.Flush();
+
             return 0;
         }
 
