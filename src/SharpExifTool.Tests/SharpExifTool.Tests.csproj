@@ -6,4 +6,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SharpExifTool\SharpExifTool.csproj" />
+  </ItemGroup>
+
 </Project>
