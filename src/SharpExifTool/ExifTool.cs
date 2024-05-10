@@ -12,8 +12,8 @@ namespace Juniansoft.SharpExifTool
     {
         private readonly string ExifToolBin = 
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
-            ? "exiftool.exe" 
-            : "exiftool";
+            ? Path.Combine("ExifTool.Win", "exiftool.exe" )
+            : Path.Combine("ExifTool.Unix", "exiftool");
         private const string Arguments = @"-stay_open 1 -@ - -common_args -charset UTF8 -G1 -args";
         private readonly string ExitCommand
             = string.Join(Environment.NewLine, new string[] { "-stay_open", "0", $"-execute{Environment.NewLine}" });

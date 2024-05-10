@@ -1,46 +1,66 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net8.0;net6.0;netstandard2.0;netstandard1.3;netstandard1.0;net45;net40;</TargetFrameworks>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-    <RootNamespace>Juniansoft.SharpExifTool</RootNamespace>
-    <AssemblyName>SharpExifTool</AssemblyName>
-    <Authors>Junian Triajianto</Authors>
-    <NeutralLanguage>en</NeutralLanguage>
-    <Owners>junian</Owners>
-    <PackageProjectUrl>https://www.juniansoft.com/sharp-exiftool/</PackageProjectUrl>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <Summary>C# exiftool wrapper</Summary>
-    <PackageTags>exif,exiftool,metadata</PackageTags>
-    <Title>SharpExifTool</Title>
-    <Description>C# exiftool wrapper.</Description>
-    <PackageId>SharpExifTool</PackageId>
-    <Copyright>Copyright (c) 2024 - Present</Copyright>
-    <RepositoryUrl>https://github.com/junian/sharp-exiftool</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <!--
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SharpExifTool.snk</AssemblyOriginatorKeyFile>
-    -->
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <!--
-    <PackageIcon>sharp-exiftool-logo.png</PackageIcon>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    -->
-    <CLSCompliant>True</CLSCompliant>
-	
-    <!-- Versions -->
-    <AssemblyVersion>12.84.0.1</AssemblyVersion>
-    <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
-    <Version>$(AssemblyVersion)</Version>
-    <FileVersion>$(AssemblyVersion)</FileVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net6.0;netstandard2.0;net45;</TargetFrameworks>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <RootNamespace>Juniansoft.SharpExifTool</RootNamespace>
+        <AssemblyName>SharpExifTool</AssemblyName>
+        <Authors>Junian Triajianto</Authors>
+        <NeutralLanguage>en</NeutralLanguage>
+        <Owners>junian</Owners>
+        <PackageProjectUrl>https://www.juniansoft.com/sharp-exiftool/</PackageProjectUrl>
+        <PackageReleaseNotes></PackageReleaseNotes>
+        <Summary>C# exiftool wrapper</Summary>
+        <PackageTags>exif;exiftool;metadata</PackageTags>
+        <Title>SharpExifTool</Title>
+        <Description>C# exiftool wrapper.</Description>
+        <PackageId>SharpExifTool</PackageId>
+        <Copyright>Copyright (c) 2024 - Present</Copyright>
+        <RepositoryUrl>https://github.com/junian/sharp-exiftool</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>SharpExifTool.snk</AssemblyOriginatorKeyFile>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <!--
+        <PackageIcon>sharp-exiftool-logo.png</PackageIcon>
+        -->
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <CLSCompliant>True</CLSCompliant>
 
-  <ItemGroup>
-    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" Condition="'$(TargetFramework)' == 'net45'" />
-  </ItemGroup>
+        <!-- Versions -->
+        <AssemblyVersion>12.84.0.1</AssemblyVersion>
+        <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
+        <Version>$(AssemblyVersion)</Version>
+        <FileVersion>$(AssemblyVersion)</FileVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\libs\**\*.*" Link="%(RecursiveDir)%(Filename)%(Extension)">
+            <Pack>true</Pack>
+            <PackagePath>content</PackagePath>
+            <IncludeInPackage>true</IncludeInPackage>
+            <CopyToOutput>true</CopyToOutput>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="..\..\libs\**\.DS_Store" />
+        <None Remove="..\..\libs\ExifTool.Unix\html\**" />
+        <None Remove="..\..\libs\ExifTool.Unix\t\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
+        <None Include="..\..\docs\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" Condition="'$(TargetFramework)' == 'net45'" />
+    </ItemGroup>
 
 </Project>
