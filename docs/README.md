@@ -14,7 +14,7 @@ This will download and extract files based on `.gitbinmodules` content and place
 
 To use different version of `exiftool`, you can edit `.gitbinmodules` file and change it with your desired version.
 
-You can also download and extract the files manually. Put them in `libs` directory so it'll look something like this:
+You can also download from [official website](https://exiftool.org) and extract the files manually. Put them in `libs` directory so it'll look something like this:
 
 ```shell
 .
