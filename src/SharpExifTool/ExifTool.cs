@@ -58,36 +58,36 @@ namespace Juniansoft.SharpExifTool
             _reader = _processExifTool.StandardOutput;
         }
 
-        public Task<int> RunAsync(string args)
+        public Task<int> ExecuteAsync(string args)
         {
-            return Task.FromResult(Run(args));
+            return Task.FromResult(Execute(args));
         }
 
-        public Task<int> RunAsync(params string[] args)
+        public Task<int> ExecuteAsync(params string[] args)
         {
-            return Task.FromResult(Run(args));
+            return Task.FromResult(Execute(args));
         }
 
-        public Task<int> RunAsync(IEnumerable<string> args)
+        public Task<int> ExecuteAsync(IEnumerable<string> args)
         {
-            return Task.FromResult(Run(args));
+            return Task.FromResult(Execute(args));
         }
 
-        public int Run(string args)
+        public int Execute(string args)
         {
             var argList = args
                 .Split(' ')
                 .Where(x => !string.IsNullOrWhiteSpace(x))
                 .Select(x => x.Trim());
-            return Run(argList);
+            return Execute(argList);
         }
 
-        public int Run(params string[] args)
+        public int Execute(params string[] args)
         {
-            return Run((IEnumerable<string>) args);
+            return Execute((IEnumerable<string>) args);
         }
 
-        public int Run(IEnumerable<string> args)
+        public int Execute(IEnumerable<string> args)
         {
             var sb = new StringBuilder();
             foreach (var arg in args)
@@ -109,7 +109,7 @@ namespace Juniansoft.SharpExifTool
         }
         public ICollection<KeyValuePair<string, string>> GetProperties(string filename)
         {
-            Run(filename);
+            Execute(filename);
 
             var result = new Dictionary<string, string>();
 
@@ -160,7 +160,7 @@ namespace Juniansoft.SharpExifTool
 
             commands.Add(filename);
 
-            Run(commands);
+            Execute(commands);
 
             var line = _reader.ReadLine();
             Debug.WriteLine(line);
