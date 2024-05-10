@@ -103,15 +103,15 @@ namespace Juniansoft.SharpExifTool
             return 0;
         }
 
-        public Task<ICollection<KeyValuePair<string, string>>> GetPropertiesAsync(string filename)
+        public Task<ICollection<KeyValuePair<string, string>>> ExtractAllMetadataAsync(string filename)
         {
-            return Task.FromResult(GetProperties(filename));
+            return Task.FromResult(ExtractAllMetadata(filename));
         }
-        public ICollection<KeyValuePair<string, string>> GetProperties(string filename)
+        public ICollection<KeyValuePair<string, string>> ExtractAllMetadata(string filename)
         {
             Execute(filename);
 
-            var result = new Dictionary<string, string>();
+            var result = new List<KeyValuePair<string, string>>();
 
             while(true)
             {
@@ -125,7 +125,7 @@ namespace Juniansoft.SharpExifTool
                     {
                         string key = line.Substring(1, eq - 1);
                         string value = line.Substring(eq + 1).Trim();
-                        result.Add(key, value);
+                        result.Add(new KeyValuePair<string, string>(key, value));
                     }
                 }
             }
@@ -133,23 +133,23 @@ namespace Juniansoft.SharpExifTool
             return result;
         }
 
-        public Task<int> RemoveAllPropertiesAsync(string filename)
+        public Task<int> RemoveAllMetadataAsync(string filename)
         {
-            return Task.FromResult(RemoveAllProperties(filename));
+            return Task.FromResult(RemoveAllMetadata(filename));
         }
 
-        public int RemoveAllProperties(string filename)
+        public int RemoveAllMetadata(string filename)
         {
-            AddOrEditProperties(filename, new Dictionary<string, string> { ["all"] = "" });
+            WriteTags(filename, new Dictionary<string, string> { ["all"] = "" });
             
             return 0;
         }
 
-        public Task<int> AddOrEditPropertiesAsync(string filename, ICollection<KeyValuePair<string, string>> properties)
+        public Task<int> WriteTagsAsync(string filename, ICollection<KeyValuePair<string, string>> properties)
         {
-            return Task.FromResult(AddOrEditProperties(filename, properties));
+            return Task.FromResult(WriteTags(filename, properties));
         }
-        public int AddOrEditProperties(string filename, ICollection<KeyValuePair<string, string>> properties)
+        public int WriteTags(string filename, ICollection<KeyValuePair<string, string>> properties)
         {
             var commands = new List<string> { };
 
