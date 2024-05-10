@@ -23,9 +23,7 @@
         <AssemblyOriginatorKeyFile>SharpExifTool.snk</AssemblyOriginatorKeyFile>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-        <!--
-        <PackageIcon>sharp-exiftool-logo.png</PackageIcon>
-        -->
+        <PackageIcon>sharp-exiftool-icon.png</PackageIcon>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <CLSCompliant>True</CLSCompliant>
@@ -57,6 +55,7 @@
     <ItemGroup>
         <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\..\docs\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\assets\img\sharp-exiftool-icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
