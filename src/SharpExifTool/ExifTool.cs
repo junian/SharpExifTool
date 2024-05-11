@@ -11,10 +11,7 @@ namespace Juniansoft.SharpExifTool
 {
     public class ExifTool : IDisposable
     {
-        private readonly string ExifToolBin = 
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
-            ? Path.Combine("ExifTool.Win", "exiftool.exe" )
-            : Path.Combine("ExifTool.Unix", "exiftool");
+        private readonly string ExifToolBin;
         private const string Arguments = @"-stay_open 1 -@ - -common_args -charset UTF8 -G1 -args";
         private readonly string ExitCommand
             = string.Join(Environment.NewLine, new string[] { "-stay_open", "0", $"-execute{Environment.NewLine}" });
@@ -27,8 +24,17 @@ namespace Juniansoft.SharpExifTool
         private StreamWriter _writer;
         private StreamReader _reader;
 
-        public ExifTool()
+        public ExifTool(string exiftoolPath = "")
         {
+            if(string.IsNullOrEmpty(exiftoolPath))
+            {
+                var currentDir = Path.GetDirectoryName(new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+                ExifToolBin  =
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    ? Path.Combine(currentDir, "ExifTool.Win", "exiftool.exe")
+                    : Path.Combine(currentDir, "ExifTool.Unix", "exiftool");
+            }
+
             // Prepare process start
             var psi = new ProcessStartInfo(ExifToolBin, Arguments)
             {
@@ -133,23 +139,26 @@ namespace Juniansoft.SharpExifTool
             return result;
         }
 
-        public Task<int> RemoveAllMetadataAsync(string filename)
+        public Task<int> RemoveAllMetadataAsync(string filename, bool overwriteOriginal = false)
         {
-            return Task.FromResult(RemoveAllMetadata(filename));
+            return Task.FromResult(RemoveAllMetadata(filename, overwriteOriginal));
         }
 
-        public int RemoveAllMetadata(string filename)
+        public int RemoveAllMetadata(string filename, bool overwriteOriginal = false)
         {
-            WriteTags(filename, new Dictionary<string, string> { ["all"] = "" });
+            WriteTags(
+                filename, 
+                new Dictionary<string, string> { ["all"] = "" },
+                overwriteOriginal);
             
             return 0;
         }
 
-        public Task<int> WriteTagsAsync(string filename, ICollection<KeyValuePair<string, string>> properties)
+        public Task<int> WriteTagsAsync(string filename, ICollection<KeyValuePair<string, string>> properties, bool overwriteOriginal = false)
         {
-            return Task.FromResult(WriteTags(filename, properties));
+            return Task.FromResult(WriteTags(filename, properties, overwriteOriginal));
         }
-        public int WriteTags(string filename, ICollection<KeyValuePair<string, string>> properties)
+        public int WriteTags(string filename, ICollection<KeyValuePair<string, string>> properties, bool overwriteOriginal = false)
         {
             var commands = new List<string> { };
 
@@ -157,6 +166,9 @@ namespace Juniansoft.SharpExifTool
             {
                 commands.Add($"-{property.Key}={property.Value}");
             }
+
+            if (overwriteOriginal)
+                commands.Add("-overwrite_original");
 
             commands.Add(filename);
 
