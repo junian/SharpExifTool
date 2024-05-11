@@ -1,6 +1,27 @@
-# SharpExifTool
+<p align="center"><img src="https://raw.githubusercontent.com/junian/sharp-exiftool/master/assets/img/sharp-exiftool-icon.png" alt="SharpExifTool Logo"></p>
 
-ExifTool CLI Wrapper in C#
+<h1 align="center">SharpExifTool</h1>
+
+<p align="center">C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.</p>
+
+<p align="center">
+    <a href="https://www.nuget.org/packages/SharpExifTool/"><img src="https://img.shields.io/nuget/v/SharpExifTool.svg" alt="SharpExifTool latest version on NuGet" title="SharpExifTool latest version on NuGet"></a>
+    <a href="https://www.nuget.org/packages/SharpExifTool/"><img src="https://img.shields.io/nuget/dt/SharpExifTool.svg" alt="SharpExifTool total downloads on NuGet" title="SharpExifTool total downloads on NuGet"></a>
+</p>
+
+----
+
+## Installation
+
+Get [SharpExifTool](https://www.nuget.org/packages/SharpExifTool/) from NuGet.
+
+```powershell
+PM> Install-Package SharpExifTool
+```
+
+## Usage
+
+WIP
 
 ## Development
 
@@ -35,3 +56,16 @@ You can also download from [official website](https://exiftool.org) and extract 
 │       └── exiftool.exe
 └── src
 ```
+
+## Credits
+
+- [ExifTool](https://exiftool.org) by Phil Harvey.
+- [FileMeta/ExifToolWrapper](https://github.com/FileMeta/ExifToolWrapper): CodeBit: C# Wrapper for Phil Harvey's ExifTool
+  
+## License
+
+This project is licensed under [MIT License](https://github.com/junian/sharp-exiftool/blob/master/LICENSE).
+
+---
+
+Made with ☕ by [Junian.dev](https://www.junian.dev).
