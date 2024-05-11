@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/junian/sharp-exiftool/master/assets/img/sharp-exiftool-icon.png" alt="SharpExifTool Logo"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/junian/SharpExifTool/master/assets/img/sharp-exiftool-icon.png" alt="SharpExifTool Logo"></p>
 
 <h1 align="center">SharpExifTool</h1>
 
@@ -64,7 +64,7 @@ You can also download from [official website](https://exiftool.org) and extract 
   
 ## License
 
-This project is licensed under [MIT License](https://github.com/junian/sharp-exiftool/blob/master/LICENSE).
+This project is licensed under [MIT License](https://github.com/junian/SharpExifTool/blob/master/LICENSE).
 
 ---
 

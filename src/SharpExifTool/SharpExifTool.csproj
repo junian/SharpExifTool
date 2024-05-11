@@ -9,15 +9,15 @@
         <Authors>Junian Triajianto</Authors>
         <NeutralLanguage>en</NeutralLanguage>
         <Owners>junian</Owners>
-        <PackageProjectUrl>https://www.juniansoft.com/sharp-exiftool/</PackageProjectUrl>
+        <PackageProjectUrl>https://www.juniansoft.com/SharpExifTool/</PackageProjectUrl>
         <PackageReleaseNotes></PackageReleaseNotes>
-        <Summary>C# exiftool wrapper</Summary>
+        <Summary>C# ExifTool wrapper</Summary>
         <PackageTags>exif;exiftool;metadata</PackageTags>
         <Title>SharpExifTool</Title>
-        <Description>C# exiftool wrapper.</Description>
+        <Description>C# ExifTool wrapper.</Description>
         <PackageId>SharpExifTool</PackageId>
         <Copyright>Copyright (c) 2024 - Present</Copyright>
-        <RepositoryUrl>https://github.com/junian/sharp-exiftool</RepositoryUrl>
+        <RepositoryUrl>https://github.com/junian/SharpExifTool</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>SharpExifTool.snk</AssemblyOriginatorKeyFile>
