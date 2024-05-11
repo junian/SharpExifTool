@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0;net6.0;netstandard2.0;net45;</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;</TargetFrameworks>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <RootNamespace>Juniansoft.SharpExifTool</RootNamespace>
@@ -29,7 +29,7 @@
         <CLSCompliant>True</CLSCompliant>
 
         <!-- Versions -->
-        <AssemblyVersion>12.84.0.1</AssemblyVersion>
+        <AssemblyVersion>12.84.0.5</AssemblyVersion>
         <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
         <Version>$(AssemblyVersion)</Version>
         <FileVersion>$(AssemblyVersion)</FileVersion>
@@ -38,7 +38,8 @@
     <ItemGroup>
         <None Include="..\..\libs\**\*.*" Link="%(RecursiveDir)%(Filename)%(Extension)">
             <Pack>true</Pack>
-            <PackagePath>content</PackagePath>
+            <PackagePath>contentFiles\any\any</PackagePath>
+            <PackageCopyToOutput>true</PackageCopyToOutput>
             <IncludeInPackage>true</IncludeInPackage>
             <CopyToOutput>true</CopyToOutput>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -58,8 +59,9 @@
         <None Include="..\..\assets\img\sharp-exiftool-icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
+    <!--
     <ItemGroup>
         <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" Condition="'$(TargetFramework)' == 'net45'" />
     </ItemGroup>
-
+    -->
 </Project>
