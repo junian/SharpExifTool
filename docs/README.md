@@ -58,9 +58,9 @@ using(var exiftool = new SharpExifTool.ExifTool())
     await exiftool.WriteTagsAsync(
         filename: "image.jpg", 
         properties: new Dictionary<string, string>
- {
- ["artist"] = ["Phil Harvey"],    
- });
+        {
+            ["artist"] = ["Phil Harvey"],    
+        });
 }
 ```
 
