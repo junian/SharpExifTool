@@ -15,8 +15,8 @@
 
 Get [SharpExifTool](https://www.nuget.org/packages/SharpExifTool/) from NuGet.
 
-```powershell
-PM> Install-Package SharpExifTool
+```shell
+dotnet add package SharpExifTool
 ```
 
 ## Usage
