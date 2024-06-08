@@ -4,17 +4,17 @@
         <TargetFrameworks>netstandard2.0;</TargetFrameworks>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>disable</Nullable>
-        <RootNamespace>Juniansoft.SharpExifTool</RootNamespace>
+        <RootNamespace>SharpExifTool</RootNamespace>
         <AssemblyName>SharpExifTool</AssemblyName>
         <Authors>Junian Triajianto</Authors>
         <NeutralLanguage>en</NeutralLanguage>
         <Owners>junian</Owners>
-        <PackageProjectUrl>https://www.juniansoft.com/SharpExifTool/</PackageProjectUrl>
+        <PackageProjectUrl>https://www.junian.dev/SharpExifTool/</PackageProjectUrl>
         <PackageReleaseNotes></PackageReleaseNotes>
-        <Summary>C# ExifTool wrapper</Summary>
+        <Summary>C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.</Summary>
         <PackageTags>exif;exiftool;metadata</PackageTags>
         <Title>SharpExifTool</Title>
-        <Description>C# ExifTool wrapper.</Description>
+        <Description>C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.</Description>
         <PackageId>SharpExifTool</PackageId>
         <Copyright>Copyright (c) 2024 - Present</Copyright>
         <RepositoryUrl>https://github.com/junian/SharpExifTool</RepositoryUrl>
@@ -29,7 +29,7 @@
         <CLSCompliant>True</CLSCompliant>
 
         <!-- Versions -->
-        <AssemblyVersion>12.84.0.5</AssemblyVersion>
+        <AssemblyVersion>12.86.0.0</AssemblyVersion>
         <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
         <Version>$(AssemblyVersion)</Version>
         <FileVersion>$(AssemblyVersion)</FileVersion>
@@ -38,7 +38,7 @@
     <ItemGroup>
         <None Include="..\..\libs\**\*.*" Link="%(RecursiveDir)%(Filename)%(Extension)">
             <Pack>true</Pack>
-            <PackagePath>contentFiles\any\any</PackagePath>
+            <PackagePath>lib\netstandard2.0</PackagePath>
             <PackageCopyToOutput>true</PackageCopyToOutput>
             <IncludeInPackage>true</IncludeInPackage>
             <CopyToOutput>true</CopyToOutput>

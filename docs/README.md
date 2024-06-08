@@ -21,21 +21,88 @@ PM> Install-Package SharpExifTool
 
 ## Usage
 
-WIP
+### Init
+
+You can create an exiftool instance by using the built-in `exiftool` binary.
+
+```csharp
+using(var exiftool = new SharpExifTool.ExifTool())
+{
+ // Do something here
+}
+```
+
+Or if you want to provide your own `exiftool` binary.
+
+```csharp
+using(var exiftool = new SharpExifTool.ExifTool(exiftoolPath: "/opt/homebrew/bin/exiftool"))
+{
+ // Do something here
+}
+```
+
+### Read All EXIF / Metadata Tags
+
+```csharp
+using(var exiftool = new SharpExifTool.ExifTool())
+{
+    await exiftool.ExtractAllMetadataAsync(filename: "image.jpg");
+}
+```
+
+### Write EXIF / Metadata Tags
+
+```csharp
+using(var exiftool = new SharpExifTool.ExifTool())
+{
+    await exiftool.WriteTagsAsync(
+        filename: "image.jpg", 
+        properties: new Dictionary<string, string>
+ {
+ ["artist"] = ["Phil Harvey"],    
+ });
+}
+```
+
+### Remove All Safe EXIF / Metadata Tags
+
+```csharp
+using(var exiftool = new SharpExifTool.ExifTool())
+{
+    await exiftool.RemoveAllMetadataAsync(filename: "image.jpg");
+}
+```
+
+### Custom Command
+
+For example, you want to execute the following in the command line:
+
+```shell
+exiftool -artist="Phil Harvey" -copyright="2011 Phil Harvey" a.jpg
+```
+
+You can do it like this in C#:
+
+```csharp
+using(var exiftool = new SharpExifTool.ExifTool())
+{
+    await exiftool.ExecuteAsync("-artist=\"Phil Harvey\" -copyright=\"2011 Phil Harvey\" a.jpg");
+}
+```
 
 ## Development
 
-Before starting development, install 3rd party dependencies by executing `getlibs.sh` (it'll only work on macOS or unix operating system, no Windows script for now).
+Before starting development, install 3rd party dependencies by executing `getlibs.sh` (it'll only work on macOS or Unix operating system, no Windows script for now).
 
 ```bash
 $ ./getlibs.sh
 ```
 
-This will download and extract files based on `.gitbinmodules` content and place them under `libs` directory.
+This will download and extract files based on `.gitbinmodules` content and place them under the `libs` directory.
 
-To use different version of `exiftool`, you can edit `.gitbinmodules` file and change it with your desired version.
+To use a different version of `exiftool`, you can edit the `.gitbinmodules` file and change it with your desired version.
 
-You can also download from [official website](https://exiftool.org) and extract the files manually. Put them in `libs` directory so it'll look something like this:
+You can also download from [official website](https://exiftool.org) and extract the files manually. Put them in the `libs` directory so it'll look something like this:
 
 ```shell
 .

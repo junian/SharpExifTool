@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Juniansoft.SharpExifTool
+namespace SharpExifTool
 {
     public class ExifTool : IDisposable
     {
