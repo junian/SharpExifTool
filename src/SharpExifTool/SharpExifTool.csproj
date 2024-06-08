@@ -29,7 +29,7 @@
         <CLSCompliant>True</CLSCompliant>
 
         <!-- Versions -->
-        <AssemblyVersion>12.86.0.0</AssemblyVersion>
+        <AssemblyVersion>12.86.0.1</AssemblyVersion>
         <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
         <Version>$(AssemblyVersion)</Version>
         <FileVersion>$(AssemblyVersion)</FileVersion>
@@ -38,7 +38,7 @@
     <ItemGroup>
         <None Include="..\..\libs\**\*.*" Link="%(RecursiveDir)%(Filename)%(Extension)">
             <Pack>true</Pack>
-            <PackagePath>lib\netstandard2.0</PackagePath>
+            <PackagePath>build\netstandard2.0</PackagePath>
             <PackageCopyToOutput>true</PackageCopyToOutput>
             <IncludeInPackage>true</IncludeInPackage>
             <CopyToOutput>true</CopyToOutput>
