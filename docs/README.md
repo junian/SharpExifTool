@@ -5,8 +5,8 @@
 <p align="center">C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.</p>
 
 <p align="center">
-    <a href="https://www.nuget.org/packages/SharpExifTool/"><img src="https://img.shields.io/nuget/v/SharpExifTool.svg" alt="SharpExifTool latest version on NuGet" title="SharpExifTool latest version on NuGet"></a>
-    <a href="https://www.nuget.org/packages/SharpExifTool/"><img src="https://img.shields.io/nuget/dt/SharpExifTool.svg" alt="SharpExifTool total downloads on NuGet" title="SharpExifTool total downloads on NuGet"></a>
+    <a href="https://www.nuget.org/packages/SharpExifTool/"><img src="https://img.shields.io/nuget/v/SharpExifTool.svg?style=for-the-badge" alt="SharpExifTool latest version on NuGet" title="SharpExifTool latest version on NuGet"></a>
+    <a href="https://www.nuget.org/packages/SharpExifTool/"><img src="https://img.shields.io/nuget/dt/SharpExifTool.svg?style=for-the-badge" alt="SharpExifTool total downloads on NuGet" title="SharpExifTool total downloads on NuGet"></a>
 </p>
 
 ----
