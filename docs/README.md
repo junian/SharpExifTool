@@ -86,7 +86,7 @@ You can do it like this in C#:
 ```csharp
 using(var exiftool = new SharpExifTool.ExifTool())
 {
-    await exiftool.ExecuteAsync("-artist=\"Phil Harvey\" -copyright=\"2011 Phil Harvey\" a.jpg");
+    await exiftool.ExecuteAsync("-artist=\"Phil Harvey\", "-copyright=\"2011 Phil Harvey\"", "a.jpg");
 }
 ```
 
