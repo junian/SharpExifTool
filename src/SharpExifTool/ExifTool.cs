@@ -64,10 +64,12 @@ namespace SharpExifTool
             _reader = _processExifTool.StandardOutput;
         }
 
+        /*
         public Task<int> ExecuteAsync(string args)
         {
             return Task.FromResult(Execute(args));
         }
+        */
 
         public Task<int> ExecuteAsync(params string[] args)
         {
@@ -79,6 +81,7 @@ namespace SharpExifTool
             return Task.FromResult(Execute(args));
         }
 
+        /*
         public int Execute(string args)
         {
             var argList = args
@@ -87,7 +90,8 @@ namespace SharpExifTool
                 .Select(x => x.Trim());
             return Execute(argList);
         }
-
+        */
+        
         public int Execute(params string[] args)
         {
             return Execute((IEnumerable<string>) args);
