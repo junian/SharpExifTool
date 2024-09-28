@@ -32,15 +32,6 @@ using(var exiftool = new SharpExifTool.ExifTool())
 }
 ```
 
-Or if you want to provide your own `exiftool` binary.
-
-```csharp
-using(var exiftool = new SharpExifTool.ExifTool(exiftoolPath: "/opt/homebrew/bin/exiftool"))
-{
- // Do something here
-}
-```
-
 ### Read All EXIF / Metadata Tags
 
 ```csharp
@@ -86,7 +77,10 @@ You can do it like this in C#:
 ```csharp
 using(var exiftool = new SharpExifTool.ExifTool())
 {
-    await exiftool.ExecuteAsync("-artist=\"Phil Harvey\"", "-copyright=\"2011 Phil Harvey\"", "a.jpg");
+    await exiftool.ExecuteAsync(
+        "-artist=\"Phil Harvey\"", 
+        "-copyright=\"2011 Phil Harvey\"", 
+        "a.jpg");
 }
 ```
 
