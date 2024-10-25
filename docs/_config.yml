@@ -1,5 +1,6 @@
 title: SharpExifTool
 description: C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.
 show_downloads: false
+show_header: false
 google_analytics: G-MKQK789F6L
-theme: jekyll-theme-primer
+theme: jekyll-theme-cayman
