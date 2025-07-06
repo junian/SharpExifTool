@@ -29,7 +29,7 @@
         <CLSCompliant>True</CLSCompliant>
 
         <!-- Versions -->
-        <AssemblyVersion>12.87.0.1</AssemblyVersion>
+        <AssemblyVersion>13.32.0.1</AssemblyVersion>
         <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
         <Version>$(AssemblyVersion)</Version>
         <FileVersion>$(AssemblyVersion)</FileVersion>
