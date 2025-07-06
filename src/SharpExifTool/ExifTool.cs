@@ -123,13 +123,21 @@ namespace SharpExifTool
             return 0;
         }
 
-        public Task<ICollection<KeyValuePair<string, string>>> ExtractAllMetadataAsync(string filename)
+        public Task<ICollection<KeyValuePair<string, string>>> ExtractAllMetadataAsync(string filename, params string[] args)
         {
-            return Task.FromResult(ExtractAllMetadata(filename));
+            return Task.FromResult(ExtractAllMetadata(filename, args));
         }
-        public ICollection<KeyValuePair<string, string>> ExtractAllMetadata(string filename)
+
+        public ICollection<KeyValuePair<string, string>> ExtractAllMetadata(string filename, params string[] args)
         {
-            Execute(filename);
+            var commands = new List<string> {};
+            if (args != null && args.Length > 0)
+            {
+                commands.AddRange(args);
+            }
+            commands.Add(filename);
+
+            Execute(commands);
 
             var result = new List<KeyValuePair<string, string>>();
 
