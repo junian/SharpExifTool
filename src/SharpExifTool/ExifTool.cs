@@ -11,14 +11,14 @@ namespace SharpExifTool
 {
     public class ExifTool : IDisposable
     {
-        private readonly string ExifToolBin;
+        private readonly string _exifToolBin;
         private const string Arguments = @"-stay_open 1 -@ - -common_args -charset UTF8 -G1 -args";
-        private readonly string ExitCommand
+        private readonly string _exitCommand
             = string.Join(Environment.NewLine, new string[] { "-stay_open", "0", $"-execute{Environment.NewLine}" });
         private const int Timeout = 30000;    // in milliseconds
         private const int ExitTimeout = 15000;
 
-        private readonly Encoding Utf8NoBOM = new UTF8Encoding(false);
+        private readonly Encoding _utf8NoBom = new UTF8Encoding(false);
 
         private Process _processExifTool;
         private StreamWriter _writer;
@@ -29,20 +29,30 @@ namespace SharpExifTool
             if(string.IsNullOrEmpty(exiftoolPath))
             {
                 var currentDir = Path.GetDirectoryName(new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-                ExifToolBin  =
+
+                if (string.IsNullOrWhiteSpace(currentDir))
+                    throw new InvalidOperationException();
+                        
+                _exifToolBin  =
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                     ? Path.Combine(currentDir, "ExifTool.Win", "exiftool.exe")
                     : Path.Combine(currentDir, "ExifTool.Unix", "exiftool");
             }
+            else
+            {
+                if(!File.Exists(exiftoolPath))
+                    throw new FileNotFoundException("ExifTool not found.", exiftoolPath);
+                _exifToolBin = exiftoolPath;
+            }
 
             // Prepare process start
-            var psi = new ProcessStartInfo(ExifToolBin, Arguments)
+            var psi = new ProcessStartInfo(_exifToolBin, Arguments)
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
-                StandardOutputEncoding = Utf8NoBOM
+                StandardOutputEncoding = _utf8NoBom
             };
 
             try
@@ -60,7 +70,7 @@ namespace SharpExifTool
 
             // ProcessStartInfo in .NET Framework doesn't have a StandardInputEncoding property (though it does in .NET Core)
             // So, we have to wrap it this way.
-            _writer = new StreamWriter(_processExifTool.StandardInput.BaseStream, Utf8NoBOM);
+            _writer = new StreamWriter(_processExifTool.StandardInput.BaseStream, _utf8NoBom);
             _reader = _processExifTool.StandardOutput;
         }
 
@@ -186,47 +196,47 @@ namespace SharpExifTool
 
         #region IDisposable Support
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
-            if (_processExifTool != null)
+            if (_processExifTool == null) 
+                return;
+            
+            if (!disposing)
             {
-                if (!disposing)
+                System.Diagnostics.Debug.Fail("Failed to dispose ExifTool.");
+            }
+
+            // If the process is running, shut it down cleanly
+            if (!_processExifTool.HasExited)
+            {
+                _writer.Write(_exitCommand);
+                _writer.Flush();
+
+                if (!_processExifTool.WaitForExit(ExitTimeout))
                 {
-                    System.Diagnostics.Debug.Fail("Failed to dispose ExifTool.");
+                    _processExifTool.Kill();
+                    Debug.Fail("Timed out waiting for exiftool to exit.");
                 }
-
-                // If process is running, shut it down cleanly
-                if (!_processExifTool.HasExited)
-                {
-                    _writer.Write(ExitCommand);
-                    _writer.Flush();
-
-                    if (!_processExifTool.WaitForExit(ExitTimeout))
-                    {
-                        _processExifTool.Kill();
-                        Debug.Fail("Timed out waiting for exiftool to exit.");
-                    }
 #if EXIF_TRACE
                     else
                     {
                         Debug.WriteLine("ExifTool exited cleanly.");
                     }
 #endif
-                }
-
-                if (_reader != null)
-                {
-                    _reader.Dispose();
-                    _reader = null;
-                }
-                if (_writer != null)
-                {
-                    _writer.Dispose();
-                    _writer = null;
-                }
-                _processExifTool.Dispose();
-                _processExifTool = null;
             }
+
+            if (_reader != null)
+            {
+                _reader.Dispose();
+                _reader = null;
+            }
+            if (_writer != null)
+            {
+                _writer.Dispose();
+                _writer = null;
+            }
+            _processExifTool.Dispose();
+            _processExifTool = null;
         }
 
         ~ExifTool()
