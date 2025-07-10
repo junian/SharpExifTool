@@ -126,7 +126,9 @@ You can also download from [official website](https://exiftool.org) and extract 
   
 ## License
 
-This project is licensed under [MIT License](https://github.com/junian/SharpExifTool/blob/master/LICENSE).
+This [SharpExifTool](https://github.com/junian/SharpExifTool) project is licensed under [MIT License](https://github.com/junian/SharpExifTool/blob/master/LICENSE).
+
+The [ExifTool](https://exiftool.org/#license) is free software; you can redistribute it and/or modify it under the same terms as [Perl itself](https://dev.perl.org/licenses/).
 
 ---
 
