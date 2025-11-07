@@ -130,6 +130,4 @@ This [SharpExifTool](https://github.com/junian/SharpExifTool) project is license
 
 The [ExifTool](https://exiftool.org/#license) is free software; you can redistribute it and/or modify it under the same terms as [Perl itself](https://dev.perl.org/licenses/).
 
----
-
 Made with ☕ by [Junian.dev](https://www.junian.dev).
