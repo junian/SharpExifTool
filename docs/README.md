@@ -52,7 +52,8 @@ using(var exiftool = new SharpExifTool.ExifTool())
         properties: new Dictionary<string, string>
         {
             ["artist"] = ["Phil Harvey"],    
-        });
+        },
+        overwriteOriginal: false);
 }
 ```
 
