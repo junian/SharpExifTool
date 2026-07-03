@@ -14,35 +14,51 @@
 
 ## Installation
 
-Get [SharpExifTool](https://www.nuget.org/packages/SharpExifTool/) from NuGet.
+To install this library to your .NET project, get it the [SharpExifTool](https://www.nuget.org/packages/SharpExifTool/) from NuGet.
+You can use the Visual Studio package manager UI or with command line below:
 
 ```shell
 dotnet add package SharpExifTool
 ```
 
-## Usage
+## Usage and Examples
+
+In this section, you'll learn on how to use the library properly.
+I make the functions as simple as possible.
+Hopefully, it can be easily understood by looking at some code examples.
 
 ### Init
 
-You can create an exiftool instance by using the built-in `exiftool` binary.
+To use `SharpExifTool`, the first thing you need is to initialize the library.
+You can create an exiftool instance by using the built-in `exiftool` binary that is shipped together with `SharpExifTool` package.
 
 ```csharp
 using(var exiftool = new SharpExifTool.ExifTool())
 {
- // Do something here
+    // Write your code here
 }
 ```
 
+The `ExifTool` implements `IDisposable` interface.
+Make sure you you call `Dispose()` after finished using it or wrapped it with `using` statement.
+
 ### Read All EXIF / Metadata Tags
+
+You can get all metadata from an image by calling the `ExtractAllMetadataAsync` function.
+It'll return a collection of `KeyValuePair` of `string`.
+Here's an example on how to use this function:
 
 ```csharp
 using(var exiftool = new SharpExifTool.ExifTool())
 {
-    await exiftool.ExtractAllMetadataAsync(filename: "image.jpg");
+    var metadataList = await exiftool.ExtractAllMetadataAsync(filename: "image.jpg");
 }
 ```
 
 ### Write EXIF / Metadata Tags
+
+You can write a metadata by using `WriteTagsAsync` function.
+In this code example, I wrote the `artist` metadata with `Phil Harvey` value to the `image.jpg` without overwriting the original file.
 
 ```csharp
 using(var exiftool = new SharpExifTool.ExifTool())
@@ -59,6 +75,9 @@ using(var exiftool = new SharpExifTool.ExifTool())
 
 ### Remove All Safe EXIF / Metadata Tags
 
+Let's say you want to strip metadata from user uploaded image reduce the number of Personally Identifiable Information from image metadata, you can call the `RemoveAllMetadataAsync` function.
+This will remove all metadata that can be safely removed from an image.
+
 ```csharp
 using(var exiftool = new SharpExifTool.ExifTool())
 {
@@ -68,13 +87,15 @@ using(var exiftool = new SharpExifTool.ExifTool())
 
 ### Custom Command
 
-For example, you want to execute the following in the command line:
+You can use custom command using this library.
+
+For example, if you already have some predefined command line parameters using the `exiftool` cli like this:
 
 ```shell
 exiftool -artist="Phil Harvey" -copyright="2011 Phil Harvey" a.jpg
 ```
 
-You can do it like this in C#:
+You can implement it using this library in C# like this:
 
 ```csharp
 using(var exiftool = new SharpExifTool.ExifTool())
