@@ -45,13 +45,16 @@ public class ExifToolUnitTest
         if (string.IsNullOrWhiteSpace(currentDir))
             throw new InvalidOperationException();
 
-        var path =
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? Path.Combine(
-                    currentDir,
-                    Environment.Is64BitProcess ? "ExifTool.Win64" : "ExifTool.Win32",
-                    "exiftool.exe")
-                : Path.Combine(currentDir, "ExifTool.Unix", "exiftool");
+        var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        var runtimeIdentifier = isWindows
+            ? (Environment.Is64BitProcess ? "win-x64" : "win-x86")
+            : "unix";
+        var path = Path.Combine(
+            currentDir,
+            "runtimes",
+            runtimeIdentifier,
+            "native",
+            isWindows ? "exiftool.exe" : "exiftool");
 
         var images = Directory.GetFiles(GetTestPath("Research In Motion"));
 

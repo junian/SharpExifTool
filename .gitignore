@@ -482,5 +482,5 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
-libs/*
-!libs/.gitkeep
+runtimes/*
+!runtimes/.gitkeep

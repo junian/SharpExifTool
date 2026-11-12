@@ -24,22 +24,33 @@ namespace SharpExifTool
         private StreamWriter _writer;
         private StreamReader _reader;
 
+        private static string GetDefaultExifToolPath()
+        {
+            var currentDir = Path.GetDirectoryName(new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+
+            if (string.IsNullOrWhiteSpace(currentDir))
+                throw new InvalidOperationException();
+
+            var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            var runtimeIdentifier = isWindows
+                ? (Environment.Is64BitProcess ? "win-x64" : "win-x86")
+                : "unix";
+            var executable = isWindows ? "exiftool.exe" : "exiftool";
+            var runtimePath = Path.Combine(currentDir, "runtimes", runtimeIdentifier, "native", executable);
+
+            // Native assets are flattened into the output directory for RID-specific builds.
+            var flattenedPath = Path.Combine(currentDir, executable);
+
+            return File.Exists(runtimePath) || !File.Exists(flattenedPath)
+                ? runtimePath
+                : flattenedPath;
+        }
+
         public ExifTool(string exiftoolPath = "")
         {
             if(string.IsNullOrEmpty(exiftoolPath))
             {
-                var currentDir = Path.GetDirectoryName(new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-
-                if (string.IsNullOrWhiteSpace(currentDir))
-                    throw new InvalidOperationException();
-                        
-                _exifToolBin  =
-                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                    ? Path.Combine(
-                        currentDir,
-                        Environment.Is64BitProcess ? "ExifTool.Win64" : "ExifTool.Win32",
-                        "exiftool.exe")
-                    : Path.Combine(currentDir, "ExifTool.Unix", "exiftool");
+                _exifToolBin = GetDefaultExifToolPath();
             }
             else
             {

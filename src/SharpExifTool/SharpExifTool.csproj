@@ -36,21 +36,30 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\libs\**\*.*" Link="%(RecursiveDir)%(Filename)%(Extension)">
-            <Pack>true</Pack>
-            <PackagePath>contentFiles\any\any</PackagePath>
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-            <IncludeInPackage>true</IncludeInPackage>
-            <CopyToOutput>true</CopyToOutput>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-        </None>
+        <None Include="..\..\runtimes\win-x86\native\**\*.*"
+              Link="runtimes\win-x86\native\%(RecursiveDir)%(Filename)%(Extension)"
+              Pack="true"
+              PackagePath="runtimes\win-x86\native"
+              CopyToOutputDirectory="PreserveNewest"
+              CopyToPublishDirectory="PreserveNewest" />
+        <None Include="..\..\runtimes\win-x64\native\**\*.*"
+              Link="runtimes\win-x64\native\%(RecursiveDir)%(Filename)%(Extension)"
+              Pack="true"
+              PackagePath="runtimes\win-x64\native"
+              CopyToOutputDirectory="PreserveNewest"
+              CopyToPublishDirectory="PreserveNewest" />
+        <None Include="..\..\runtimes\unix\native\**\*.*"
+              Link="runtimes\unix\native\%(RecursiveDir)%(Filename)%(Extension)"
+              Pack="true"
+              PackagePath="runtimes\unix\native"
+              CopyToOutputDirectory="PreserveNewest"
+              CopyToPublishDirectory="PreserveNewest" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="..\..\libs\**\.DS_Store" />
-        <None Remove="..\..\libs\ExifTool.Unix\html\**" />
-        <None Remove="..\..\libs\ExifTool.Unix\t\**" />
+        <None Remove="..\..\runtimes\**\.DS_Store" />
+        <None Remove="..\..\runtimes\unix\native\html\**" />
+        <None Remove="..\..\runtimes\unix\native\t\**" />
     </ItemGroup>
 
     <ItemGroup>
