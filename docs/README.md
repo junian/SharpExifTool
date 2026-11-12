@@ -143,7 +143,9 @@ Alternatively, you can download it from the [official website](https://exiftool.
 │   │   ├── lib
 │   │   ├── perl-Image-ExifTool.spec
 │   │   └── t
-│   └── ExifTool.Win
+│   ├── ExifTool.Win32
+│   │   └── exiftool.exe
+│   └── ExifTool.Win64
 │       └── exiftool.exe
 └── src
 ```

@@ -35,7 +35,10 @@ namespace SharpExifTool
                         
                 _exifToolBin  =
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                    ? Path.Combine(currentDir, "ExifTool.Win", "exiftool.exe")
+                    ? Path.Combine(
+                        currentDir,
+                        Environment.Is64BitProcess ? "ExifTool.Win64" : "ExifTool.Win32",
+                        "exiftool.exe")
                     : Path.Combine(currentDir, "ExifTool.Unix", "exiftool");
             }
             else

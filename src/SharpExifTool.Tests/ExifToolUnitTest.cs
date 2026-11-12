@@ -47,7 +47,10 @@ public class ExifToolUnitTest
 
         var path =
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? Path.Combine(currentDir, "ExifTool.Win", "exiftool.exe")
+                ? Path.Combine(
+                    currentDir,
+                    Environment.Is64BitProcess ? "ExifTool.Win64" : "ExifTool.Win32",
+                    "exiftool.exe")
                 : Path.Combine(currentDir, "ExifTool.Unix", "exiftool");
 
         var images = Directory.GetFiles(GetTestPath("Research In Motion"));
