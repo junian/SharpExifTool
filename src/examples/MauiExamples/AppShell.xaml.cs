@@ -1,4 +1,4 @@
-﻿namespace MauiExamples;
+namespace MauiExamples;
 
 public partial class AppShell : Shell
 {
