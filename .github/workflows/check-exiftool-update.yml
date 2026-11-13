@@ -1,0 +1,92 @@
+name: Check ExifTool updates
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run once a day at 03:17 UTC.
+    - cron: '17 3 * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: check-exiftool-update
+  cancel-in-progress: true
+
+jobs:
+  check-exiftool-update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '11.0.x'
+
+      - name: Update .gitbinmodules with the latest ExifTool version
+        id: version
+        run: dotnet run scripts/update_exiftool_version.cs
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet -- .gitbinmodules; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to .gitbinmodules."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git --no-pager diff -- .gitbinmodules
+          fi
+
+      - name: Create pull request
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          BRANCH="automation/exiftool-${VERSION}"
+
+          # Do not recreate a pull request that was already opened or closed for this version.
+          PR_STATE=$(gh pr list --head "$BRANCH" --state all --json state --jq '.[0].state // ""')
+          if [ -n "$PR_STATE" ]; then
+            echo "A pull request for $BRANCH already exists (state: $PR_STATE). Nothing to do."
+            exit 0
+          fi
+
+          git switch -c "$BRANCH"
+          git add .gitbinmodules
+          git commit -m "Update ExifTool to ${VERSION}"
+          git push --force origin "$BRANCH"
+
+          gh pr create \
+            --base "${DEFAULT_BRANCH:-master}" \
+            --head "$BRANCH" \
+            --title "Update ExifTool to ${VERSION}" \
+            --body "$(cat <<EOF
+          Automated ExifTool release check.
+
+          This pull request updates \`.gitbinmodules\` with the download links for **ExifTool ${VERSION}**:
+
+          - \`exiftool-${VERSION}_32.zip\` (Windows x86)
+          - \`exiftool-${VERSION}_64.zip\` (Windows x64)
+          - \`Image-ExifTool-${VERSION}.tar.gz\` (Unix)
+
+          Source: https://sourceforge.net/projects/exiftool/files/
+
+          ### Review checklist
+          - [ ] Run \`./getlibs.sh\` and verify the archives extract into \`runtimes/\`
+          - [ ] Run \`dotnet test\`
+          - [ ] Bump \`AssemblyVersion\` in \`src/SharpExifTool/SharpExifTool.csproj\` if this should be a new package release
+          EOF
+          )"
