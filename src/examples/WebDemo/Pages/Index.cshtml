@@ -1,10 +1,28 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "ExifTool Demo";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1 class="display-5">ExifTool Metadata Viewer</h1>
+<p class="text-muted">Select an image to read all of its metadata with ExifTool.</p>
+
+<form method="post" enctype="multipart/form-data" class="mb-4">
+    <div class="mb-3">
+        <input asp-for="Image" type="file" class="form-control" accept="image/*" />
+    </div>
+    <button type="submit" class="btn btn-primary">Read Metadata</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        <pre class="mb-0 text-wrap">@Model.ErrorMessage</pre>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.Result))
+{
+    <label for="result" class="form-label">ExifTool output</label>
+    <textarea id="result" class="form-control font-monospace" rows="24" readonly>@Model.Result</textarea>
+}

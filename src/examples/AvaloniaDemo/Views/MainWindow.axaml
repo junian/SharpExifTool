@@ -1,22 +1,40 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:AvaloniaDemo.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvaloniaDemo.Views.MainWindow"
-        x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AvaloniaDemo">
+        Title="SharpExifTool Avalonia Demo"
+        Width="900"
+        Height="650"
+        MinWidth="560"
+        MinHeight="400">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainViewModel />
-    </Design.DataContext>
+    <Grid Margin="16" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="8">
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
+        <Button x:Name="SelectImageButton"
+                Grid.Row="0"
+                HorizontalAlignment="Left"
+                Padding="16,6"
+                Content="Select Image..."
+                Click="OnSelectImageClicked" />
+
+        <TextBlock x:Name="SelectedFileText"
+                   Grid.Row="1"
+                   Text="No image selected."
+                   TextTrimming="CharacterEllipsis" />
+
+        <TextBox x:Name="ResultTextBox"
+                 Grid.Row="2"
+                 IsReadOnly="True"
+                 AcceptsReturn="True"
+                 TextWrapping="NoWrap"
+                 FontFamily="Consolas,Menlo,monospace"
+                 PlaceholderText="ExifTool results will appear here." />
+
+        <ProgressBar x:Name="BusyIndicator"
+                     Grid.Row="3"
+                     Height="4"
+                     IsIndeterminate="True"
+                     IsVisible="False" />
+    </Grid>
 
 </Window>
