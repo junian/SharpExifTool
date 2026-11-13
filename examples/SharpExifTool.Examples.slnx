@@ -1,7 +1,6 @@
 <Solution>
   <Project Path="AvaloniaDemo/AvaloniaDemo.csproj" />
   <Project Path="ConsoleDemo/ConsoleDemo.csproj" Id="f5d965e0-9c8c-4377-b641-aa3ce4a1bf4c" />
-  <Project Path="MauiDemo/MauiDemo.csproj" Id="0a91ce72-72a1-4f7e-9a3f-6feecaf10dfc" />
   <Project Path="WebDemo/WebDemo.csproj" Id="58ca8433-75ac-4f2f-bf77-6e3d3332bc42" />
   <Project Path="WinFormsDemo/WinFormsDemo.csproj" Id="66a6668f-7d51-45c7-b354-93f89b55ad10" />
 </Solution>

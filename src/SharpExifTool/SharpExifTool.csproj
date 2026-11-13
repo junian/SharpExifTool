@@ -10,13 +10,13 @@
         <NeutralLanguage>en</NeutralLanguage>
         <Owners>junian</Owners>
         <PackageProjectUrl>https://www.junian.dev/SharpExifTool/</PackageProjectUrl>
-        <PackageReleaseNotes></PackageReleaseNotes>
+        <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/../../ReleaseNotes.txt"))</PackageReleaseNotes>
         <Summary>C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.</Summary>
         <PackageTags>exif;exiftool;metadata</PackageTags>
         <Title>SharpExifTool</Title>
         <Description>C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.</Description>
         <PackageId>SharpExifTool</PackageId>
-        <Copyright>Copyright (c) 2024 - Present</Copyright>
+        <Copyright>Copyright (c) 2024 - 2026</Copyright>
         <RepositoryUrl>https://github.com/junian/SharpExifTool</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <SignAssembly>true</SignAssembly>
@@ -29,9 +29,9 @@
         <CLSCompliant>True</CLSCompliant>
 
         <!-- Versions -->
-        <AssemblyVersion>13.63.0.1</AssemblyVersion>
+        <AssemblyVersion>13.63.0.3</AssemblyVersion>
         <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
-        <Version>$(AssemblyVersion)-beta</Version>
+        <Version>$(AssemblyVersion)</Version>
         <FileVersion>$(AssemblyVersion)</FileVersion>
     </PropertyGroup>
 

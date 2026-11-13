@@ -1,14 +1,14 @@
-<p align="center"><img src="https://raw.githubusercontent.com/junian/SharpExifTool/master/assets/img/sharp-exiftool-icon.png" alt="SharpExifTool Logo"></p>
+<div align="center">
 
-<h1 align="center">SharpExifTool</h1>
+![SharpExifTool Logo](https://raw.githubusercontent.com/junian/SharpExifTool/master/assets/img/sharp-exiftool-icon.png)
 
-<p align="center">C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.</p>
+# SharpExifTool
 
-<p align="center">
-    <a href="https://github.com/junian/SharpExifTool/"><img src="https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white&style=for-the-badge" alt="SharpExifTool on GitHub" title="SharpExifTool on GitHub"></a>
-    <a href="https://www.nuget.org/packages/SharpExifTool/"><img src="https://img.shields.io/nuget/v/SharpExifTool.svg?style=for-the-badge" alt="SharpExifTool latest version on NuGet" title="SharpExifTool latest version on NuGet"></a>
-    <a href="https://www.nuget.org/packages/SharpExifTool/"><img src="https://img.shields.io/nuget/dt/SharpExifTool.svg?style=for-the-badge" alt="SharpExifTool total downloads on NuGet" title="SharpExifTool total downloads on NuGet"></a>
-</p>
+C# Wrapper for ExifTool by Phil Harvey. Available for Windows, macOS, and Linux.
+
+[![SharpExifTool on GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white&style=for-the-badge "SharpExifTool on GitHub")](https://github.com/junian/SharpExifTool/) [![SharpExifTool latest version on NuGet](https://img.shields.io/nuget/v/SharpExifTool.svg?style=for-the-badge "SharpExifTool latest version on NuGet")](https://www.nuget.org/packages/SharpExifTool/) [![SharpExifTool total downloads on NuGet](https://img.shields.io/nuget/dt/SharpExifTool.svg?style=for-the-badge "SharpExifTool total downloads on NuGet")](https://www.nuget.org/packages/SharpExifTool/) [![Buy me a coffee](https://img.shields.io/badge/Support-Buy%20Me%20A%20Coffee-FFDD00?logo=buymeacoffee&style=for-the-badge "Buy me a coffee")](https://www.junian.dev/coffee/)
+
+</div>
 
 ----
 

@@ -1,0 +1,49 @@
+SharpExifTool Release Notes
+
+13.63.0.3 - 2026-11-13
+* Added: Sample projects for .NET MAUI (Windows and macOS), WinForms, Avalonia, ASP.NET Core Razor Pages, and a console app that demonstrate selecting an image and displaying its metadata.
+* Added: Bundled 64-bit Windows ExifTool executable alongside the 32-bit one.
+* Changed: Updated the bundled ExifTool to 13.63.
+* Changed: Bundled ExifTool files now ship under runtimes/{win-x86,win-x64,unix}/native instead of contentFiles, and the executable is resolved from runtimes/{rid}/native with a fallback to the flattened output directory.
+* Changed: getlibs.sh downloads the 32-bit Windows, 64-bit Windows, and Unix archives separately.
+
+13.32.0.1 - 2025-07-06
+* Added: Optional ExifTool arguments for ExtractAllMetadata and ExtractAllMetadataAsync, enabling flags such as -u to extract unknown tags.
+* Fixed: The exiftoolPath constructor argument is now used instead of being ignored; a FileNotFoundException is thrown when the path does not exist.
+* Changed: Updated the bundled ExifTool to 13.32.
+* Changed: Unit tests now target .NET 9.
+
+12.87.0.1 - 2024-09-28
+* Added: Unit test project with ExifTool sample images covering metadata reading and writing.
+* Changed: Updated the bundled ExifTool to 12.87.
+
+12.86.0.2 - 2024-06-08
+* Fixed: Restored the contentFiles package layout so the bundled ExifTool files are copied to the output directory of consuming projects.
+
+12.86.0.1 - 2024-06-08
+* Changed: Moved the bundled ExifTool files to build/netstandard2.0.
+
+12.86.0 - 2024-06-08
+* Added: Optional exiftoolPath constructor argument for using a custom ExifTool executable.
+* Added: overwriteOriginal option for WriteTags, WriteTagsAsync, RemoveAllMetadata, and RemoveAllMetadataAsync.
+* Changed: Renamed the namespace to SharpExifTool (breaking change).
+* Changed: Updated the bundled ExifTool to 12.86.
+* Changed: Moved the bundled ExifTool files to lib/netstandard2.0.
+
+12.84.0.5 - 2024-05-11
+* Changed: Finalized the netstandard2.0-only package with contentFiles and copy-to-output metadata for the bundled ExifTool files.
+
+12.84.0.4 - 2024-05-11
+* Changed: Limited the package to netstandard2.0; removed the net45, net6.0, and net8.0 targets.
+* Changed: Moved the bundled ExifTool files under lib/netstandard2.0.
+
+12.84.0.3 - 2024-05-11
+* Changed: Moved the bundled ExifTool files from contentFiles to lib.
+
+12.84.0.2 - 2024-05-11
+* Changed: Moved the bundled ExifTool files from the legacy content folder to contentFiles/any/any.
+
+12.84.0.1 - 2024-05-11
+* Added: Initial release with ExtractAllMetadata, WriteTags, RemoveAllMetadata, raw Execute overloads, and TryParseDate.
+* Added: Targets for .NET Framework 4.5, .NET 6, .NET 8, and .NET Standard 2.0.
+* Added: Bundled ExifTool 12.84 binaries for Windows and Unix.
