@@ -21,6 +21,6 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
-    <PackageReference Include="SharpExifTool" Version="13.63.0.1-beta" />
+    <PackageReference Include="SharpExifTool" Version="13.63.0.3" />
   </ItemGroup>
 </Project>
