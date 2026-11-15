@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SharpExifTool.Tests/SharpExifTool.Tests.csproj" />
+  <Project Path="SharpExifTool/SharpExifTool.csproj" />
+</Solution>
