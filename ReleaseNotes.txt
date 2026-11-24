@@ -1,5 +1,9 @@
 SharpExifTool Release Notes
 
+13.64.0.1 - 2026-11-24
+* Changed: Bundled ExifTool files now ship under runtimes/{win-x86,win-x64,unix}/native/exiftool instead of contentFiles, and the executable is resolved from runtimes/{rid}/native/exiftool with a fallback to the flattened output directory.
+* Changed: Updated the bundled ExifTool to 13.64.
+
 13.63.0.3 - 2026-11-13
 * Added: Sample projects for .NET MAUI (Windows and macOS), WinForms, Avalonia, ASP.NET Core Razor Pages, and a console app that demonstrate selecting an image and displaying its metadata.
 * Added: Bundled 64-bit Windows ExifTool executable alongside the 32-bit one.

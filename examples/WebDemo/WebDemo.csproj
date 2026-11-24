@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpExifTool" Version="13.63.0.3" />
+    <PackageReference Include="SharpExifTool" Version="13.64.0.1" />
   </ItemGroup>
 
 </Project>

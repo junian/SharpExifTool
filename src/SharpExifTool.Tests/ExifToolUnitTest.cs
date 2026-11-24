@@ -54,6 +54,7 @@ public class ExifToolUnitTest
             "runtimes",
             runtimeIdentifier,
             "native",
+            "exiftool",
             isWindows ? "exiftool.exe" : "exiftool");
 
         var images = Directory.GetFiles(GetTestPath("Research In Motion"));

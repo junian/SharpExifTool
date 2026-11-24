@@ -122,7 +122,7 @@ Before starting development, install the third-party dependencies by running `ge
 $ ./getlibs.sh
 ```
 
-This downloads and extracts the files defined in `.gitbinmodules` into the `runtimes/{rid}/native` directories.
+This downloads and extracts the files defined in `.gitbinmodules` into the `runtimes/{rid}/native/exiftool` directories.
 
 To use a different version of `exiftool`, edit the `.gitbinmodules` file and change it to your desired version.
 
@@ -135,21 +135,24 @@ Alternatively, you can download it from the [official website](https://exiftool.
 ├── runtimes
 │   ├── unix
 │   │   └── native
-│   │       ├── Makefile.PL
-│   │       ├── arg_files
-│   │       ├── build_geolocation
-│   │       ├── config_files
-│   │       ├── exiftool
-│   │       ├── fmt_files
-│   │       ├── lib
-│   │       ├── perl-Image-ExifTool.spec
-│   │       └── t
+│   │       └── exiftool
+│   │           ├── Makefile.PL
+│   │           ├── arg_files
+│   │           ├── build_geolocation
+│   │           ├── config_files
+│   │           ├── exiftool
+│   │           ├── fmt_files
+│   │           ├── lib
+│   │           ├── perl-Image-ExifTool.spec
+│   │           └── t
 │   ├── win-x64
 │   │   └── native
-│   │       └── exiftool.exe
+│   │       └── exiftool
+│   │           └── exiftool.exe
 │   └── win-x86
 │       └── native
-│           └── exiftool.exe
+│           └── exiftool
+│               └── exiftool.exe
 └── src
 ```
 

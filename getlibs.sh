@@ -42,21 +42,21 @@ echo "Download finished."
 echo "Extracting files ..."
 
 # Windows x86 (32-bit)
-mkdir -p runtimes/win-x86
+mkdir -p runtimes/win-x86/native
 unzip -o "$DOWNLOAD_DIR"/exiftool-*_32.zip -d runtimes/win-x86
-mv runtimes/win-x86/exiftool-*_32 runtimes/win-x86/native
-chmod -R u+w runtimes/win-x86/native
-mv runtimes/win-x86/native/exiftool*.exe runtimes/win-x86/native/exiftool.exe
+mv runtimes/win-x86/exiftool-*_32 runtimes/win-x86/native/exiftool
+chmod -R u+w runtimes/win-x86/native/exiftool
+mv runtimes/win-x86/native/exiftool/exiftool*.exe runtimes/win-x86/native/exiftool/exiftool.exe
 
 # Windows x64 (64-bit)
-mkdir -p runtimes/win-x64
+mkdir -p runtimes/win-x64/native
 unzip -o "$DOWNLOAD_DIR"/exiftool-*_64.zip -d runtimes/win-x64
-mv runtimes/win-x64/exiftool-*_64 runtimes/win-x64/native
-chmod -R u+w runtimes/win-x64/native
-mv runtimes/win-x64/native/exiftool*.exe runtimes/win-x64/native/exiftool.exe
+mv runtimes/win-x64/exiftool-*_64 runtimes/win-x64/native/exiftool
+chmod -R u+w runtimes/win-x64/native/exiftool
+mv runtimes/win-x64/native/exiftool/exiftool*.exe runtimes/win-x64/native/exiftool/exiftool.exe
 
 # Unix
-mkdir -p runtimes/unix/native
-tar -jxvf "$DOWNLOAD_DIR"/Image-ExifTool*.tar.gz -C runtimes/unix/native --strip-components=1
+mkdir -p runtimes/unix/native/exiftool
+tar -jxvf "$DOWNLOAD_DIR"/Image-ExifTool*.tar.gz -C runtimes/unix/native/exiftool --strip-components=1
 
 echo "Files extraction finished. You can use them for development now."

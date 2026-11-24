@@ -36,14 +36,20 @@ namespace SharpExifTool
                 ? (Environment.Is64BitProcess ? "win-x64" : "win-x86")
                 : "unix";
             var executable = isWindows ? "exiftool.exe" : "exiftool";
-            var runtimePath = Path.Combine(currentDir, "runtimes", runtimeIdentifier, "native", executable);
+            var runtimePath = Path.Combine(currentDir, "runtimes", runtimeIdentifier, "native", "exiftool", executable);
 
             // Native assets are flattened into the output directory for RID-specific builds.
             var flattenedPath = Path.Combine(currentDir, executable);
+            var flattenedExifToolPath = Path.Combine(currentDir, "exiftool", executable);
 
-            return File.Exists(runtimePath) || !File.Exists(flattenedPath)
-                ? runtimePath
-                : flattenedPath;
+            if (File.Exists(runtimePath))
+                return runtimePath;
+            if (File.Exists(flattenedPath))
+                return flattenedPath;
+            if (File.Exists(flattenedExifToolPath))
+                return flattenedExifToolPath;
+
+            return runtimePath;
         }
 
         public ExifTool(string exiftoolPath = "")

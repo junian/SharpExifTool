@@ -29,7 +29,7 @@
         <CLSCompliant>True</CLSCompliant>
 
         <!-- Versions -->
-        <AssemblyVersion>13.63.0.3</AssemblyVersion>
+        <AssemblyVersion>13.64.0.1</AssemblyVersion>
         <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
         <Version>$(AssemblyVersion)</Version>
         <FileVersion>$(AssemblyVersion)</FileVersion>
@@ -58,8 +58,8 @@
 
     <ItemGroup>
         <None Remove="..\..\runtimes\**\.DS_Store" />
-        <None Remove="..\..\runtimes\unix\native\html\**" />
-        <None Remove="..\..\runtimes\unix\native\t\**" />
+        <None Remove="..\..\runtimes\unix\native\exiftool\html\**" />
+        <None Remove="..\..\runtimes\unix\native\exiftool\t\**" />
     </ItemGroup>
 
     <ItemGroup>
