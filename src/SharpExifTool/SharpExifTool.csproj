@@ -29,7 +29,7 @@
         <CLSCompliant>True</CLSCompliant>
 
         <!-- Versions -->
-        <AssemblyVersion>13.64.0.1</AssemblyVersion>
+        <AssemblyVersion>13.64.0.3</AssemblyVersion>
         <ReleaseVersion>$(AssemblyVersion)</ReleaseVersion>
         <Version>$(AssemblyVersion)</Version>
         <FileVersion>$(AssemblyVersion)</FileVersion>
@@ -66,6 +66,10 @@
         <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\..\docs\README.md" Pack="true" PackagePath="\" />
         <None Include="..\..\assets\img\sharp-exiftool-icon.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="buildTransitive\SharpExifTool.targets" Pack="true" PackagePath="buildTransitive" />
     </ItemGroup>
 
     <!--

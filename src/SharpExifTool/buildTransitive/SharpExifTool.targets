@@ -1,0 +1,21 @@
+<Project>
+
+  <!--
+    Mac Catalyst doesn't know where to place native assets from this package inside
+    the app bundle, so they are skipped unless a PublishFolderType is specified.
+    Keep the package layout and put the files next to the app assemblies so
+    SharpExifTool can locate the bundled executable at runtime.
+  -->
+  <Target Name="SharpExifToolBundleMacCatalystNativeAssets"
+          BeforeTargets="_ComputePublishLocation"
+          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+    <ItemGroup>
+      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)"
+                             Condition="'%(ResolvedFileToPublish.NuGetPackageId)' == 'SharpExifTool' And '%(ResolvedFileToPublish.AssetType)' == 'native'">
+        <PublishFolderType>Assembly</PublishFolderType>
+        <Link>%(ResolvedFileToPublish.PathInPackage)</Link>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

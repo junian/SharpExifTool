@@ -94,11 +94,15 @@ namespace MauiDemo
                 _selectedFileLabel.Text = "Opening file picker...";
                 _resultEditor.Text = string.Empty;
 
+#if MACCATALYST
+                var file = await MacCatalystImagePicker.PickAsync();
+#else
                 var file = await FilePicker.Default.PickAsync(new PickOptions
                 {
                     PickerTitle = "Select an image",
                     FileTypes = FilePickerFileType.Images
                 });
+#endif
 
                 if (file is null)
                 {
